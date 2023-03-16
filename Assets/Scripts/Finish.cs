@@ -7,17 +7,20 @@ public class Finish : MonoBehaviour
 {
 
     private AudioSource finishSound;
+
+    private bool LevelCompleted = false;
     void Start()
     {
         finishSound = GetComponent<AudioSource>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player")
+        if (collision.gameObject.name == "Player" && !LevelCompleted)
         {
             finishSound.Play();
+            LevelCompleted = true;
             Invoke("CompleteLevel", 2f);
-            CompleteLevel();
+
         }
     }
     private void CompleteLevel()
